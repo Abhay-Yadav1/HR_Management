@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-
+import API_BASE from "../api";
 const DEPT_ICONS = {
   Engineering: "💻",
   Marketing: "📣",
@@ -24,7 +24,7 @@ function Departments() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/employees")
+    axios.get(`${API_BASE}/employees`)
       .then(res => {
         const employees = res.data;
 

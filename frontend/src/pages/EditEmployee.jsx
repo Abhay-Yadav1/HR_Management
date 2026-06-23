@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-
+import API_BASE from "../api";
 const DEPARTMENTS = ["Engineering", "Marketing", "Sales", "HR", "Finance", "Operations"];
 
 function EditEmployee() {
@@ -12,7 +12,7 @@ function EditEmployee() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    axios.get(`http://localhost:5000/api/employees/${id}`)
+    axios.get(`${API_BASE}/employees/${id}`)
       .then(res => { setForm(res.data); setLoading(false); })
       .catch(() => { setMsg({ text: "Could not load employee.", type: "error" }); setLoading(false); });
   }, [id]);
@@ -21,7 +21,7 @@ function EditEmployee() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.put(`http://localhost:5000/api/employees/${id}`, form)
+    axios.put(`${API_BASE}/employees/${id}`, form)
       .then(() => {
         setMsg({ text: "Employee updated successfully!", type: "success" });
         setTimeout(() => navigate("/employees"), 1500);

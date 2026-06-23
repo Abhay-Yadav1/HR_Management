@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-
+import API_BASE from "../api";
 function Employees() {
   const [employees, setEmployees] = useState([]);
   const [loading, setLoading] = useState(true);
   const [msg, setMsg] = useState("");
 
   const fetchEmployees = () => {
-    axios.get("http://localhost:5000/api/employees")
+    axios.get(`${API_BASE}/employees`)
       .then(res => { setEmployees(res.data); setLoading(false); })
       .catch(() => setLoading(false));
   };
@@ -17,7 +17,7 @@ function Employees() {
 
   const handleDelete = (id) => {
     if (!window.confirm("Are you sure you want to delete this employee?")) return;
-    axios.delete(`http://localhost:5000/api/employees/${id}`)
+    axios.delete(`${API_BASE}/employees/${id}`)
       .then(() => {
         setMsg("Employee deleted successfully.");
         fetchEmployees();

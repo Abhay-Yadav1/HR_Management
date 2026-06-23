@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import API_BASE from "../api";
 const DEPARTMENTS = ["Engineering", "Marketing", "Sales", "HR", "Finance", "Operations"];
 const emptyForm = { name: "", email: "", phone: "", department: "", position: "", salary: "", status: "Active" };
 
@@ -14,7 +14,7 @@ function AddEmployee() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:5000/api/employees", form)
+    axios.post(`${API_BASE}/employees`, form)
       .then(() => {
         setMsg({ text: "Employee added successfully!", type: "success" });
         setForm(emptyForm);

@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import API_BASE from "../api";
 
 function Dashboard() {
   const [stats, setStats] = useState({ total: 0, active: 0, departments: 0, avgSalary: 0 });
 
   useEffect(() => {
-    axios.get("http://localhost:5000/api/employees")
+    axios.get(`${API_BASE}/employees`)
       .then(res => {
         const employees = res.data;
         const active = employees.filter(e => e.status === "Active").length;
